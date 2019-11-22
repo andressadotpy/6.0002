@@ -41,13 +41,16 @@ def load_map(map_filename):
             source = Node(src)
             destination = Node(dest)
             we = WeightedEdge(source, destination, total_dist, out_dist)
-            if not D.has_node(source):
-                D.add_node(source)
-            if not D.has_node(destination):
-                D.add_node(destination)
+            D = _add_node(D, source, destination)
             D.add_edge(we)
     return D
 
+def _add_node(D, src, dest):
+    if not D.has_node(src):
+        D.add_node(src)
+    if not D.has_node(dest):
+        D.add_node(dest)
+    return D
 
 
 

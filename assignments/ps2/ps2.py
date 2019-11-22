@@ -1,12 +1,3 @@
-# 6.0002 Problem Set 5
-# Graph optimization
-# Name:
-# Collaborators:
-# Time:
-
-#
-# Finding shortest paths through MIT buildings
-#
 import unittest
 from graph import Digraph, Node, WeightedEdge
 
@@ -19,11 +10,11 @@ from graph import Digraph, Node, WeightedEdge
 # do the graph's edges represent? Where are the distances
 # represented?
 #
-# Answer:
+# Answer: Each Node is a building at MIT and each Edge is a path
+# from one building to another.
 #
 
 
-# Problem 2b: Implementing load_map
 def load_map(map_filename):
     """
     Parses the map file and constructs a directed graph
@@ -42,9 +33,23 @@ def load_map(map_filename):
     Returns:
         a Digraph representing the map
     """
-
-    # TODO
     print("Loading map from file...")
+    D = Digraph()
+    with open(map_filename, 'r') as f:
+        for count, line in enumerate(f):
+            src, dest, total_dist, out_dist = line.split(' ')
+            source = Node(src)
+            destination = Node(dest)
+            we = WeightedEdge(source, destination, total_dist, out_dist)
+            if not D.has_node(source):
+                D.add_node(source)
+            if not D.has_node(destination):
+                D.add_node(destination)
+            D.add_edge(we)
+    return D
+
+
+
 
 # Problem 2c: Testing load_map
 # Include the lines used to test load_map below, but comment them out

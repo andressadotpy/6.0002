@@ -11,8 +11,8 @@ from graph import Digraph, Node, WeightedEdge
 # represented?
 #
 # Answer: Each Node is a building at MIT and each Edge is a path
-# from one building to another.
-#
+# from one building to another. The paths can be outside or inside
+# a building.
 
 
 def load_map(map_filename):
@@ -52,11 +52,20 @@ def _add_node(D, src, dest):
         D.add_node(dest)
     return D
 
+class TestLoadMap(unittest.TestCase):
 
+    def setUp(self):
+        self.D = load_map('test_load_map.txt')
 
-# Problem 2c: Testing load_map
-# Include the lines used to test load_map below, but comment them out
-
+    def test_data_is_loading_correctly(self):
+        self.assertEqual(str(self.D), ('32->36 (70, 0)\n'
+                                        '32->57 (30, 0)\n'
+                                        '32->68 (110, 80)\n'
+                                        '32->76 (80, 50)\n'
+                                        '36->32 (70, 0)\n'
+                                        '57->32 (30, 0)\n'
+                                        '68->32 (110, 80)\n'
+                                        '76->32 (80, 50)'))
 
 #
 # Problem 3: Finding the Shorest Path using Optimized Search Method

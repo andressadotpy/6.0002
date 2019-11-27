@@ -55,7 +55,6 @@ class TestLoadMap(unittest.TestCase):
                                         '76->32 (80, 50)'))
 
 
-# Problem 3b: Implement get_best_path
 def get_best_path(digraph, start, end, path, max_dist_outdoors, best_dist,
                   best_path):
     """
@@ -115,7 +114,6 @@ def get_best_path(digraph, start, end, path, max_dist_outdoors, best_dist,
     return best_path
 
 
-# Problem 3c: Implement directed_dfs
 def directed_dfs(digraph, start, end, max_total_dist, max_dist_outdoors):
     """
     Finds the shortest path from start to end using a directed depth-first
@@ -150,7 +148,11 @@ def directed_dfs(digraph, start, end, max_total_dist, max_dist_outdoors):
     if path == None:
         raise ValueError('No path that satisfies the constraints')
     elif path[1] <= max_total_dist:
-        return path[0]
+        list_of_names = []
+        for node in path[0]:
+            list_of_names.append(node.get_name())
+        return list_of_names
+    raise ValueError
 
 
 # ================================================================
@@ -212,35 +214,35 @@ class Ps2Test(unittest.TestCase):
     def test_path_one_step(self):
         self._test_path(expectedPath=['32', '56'])
 
-    @unittest.skip
+#    @unittest.skip
     def test_path_no_outdoors(self):
         self._test_path(
             expectedPath=['32', '36', '26', '16', '56'], outdoor_dist=0)
 
-    @unittest.skip
+#    @unittest.skip
     def test_path_multi_step(self):
         self._test_path(expectedPath=['2', '3', '7', '9'])
 
-    @unittest.skip
+#    @unittest.skip
     def test_path_multi_step_no_outdoors(self):
         self._test_path(
             expectedPath=['2', '4', '10', '13', '9'], outdoor_dist=0)
 
-    @unittest.skip
+#    @unittest.skip
     def test_path_multi_step2(self):
         self._test_path(expectedPath=['1', '4', '12', '32'])
 
-    @unittest.skip
+#    @unittest.skip
     def test_path_multi_step_no_outdoors2(self):
         self._test_path(
             expectedPath=['1', '3', '10', '4', '12', '24', '34', '36', '32'],
             outdoor_dist=0)
 
-    @unittest.skip
+#    @unittest.skip
     def test_impossible_path1(self):
         self._test_impossible_path('8', '50', outdoor_dist=0)
 
-    @unittest.skip
+#    @unittest.skip
     def test_impossible_path2(self):
         self._test_impossible_path('10', '32', total_dist=100)
 

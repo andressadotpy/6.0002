@@ -93,7 +93,7 @@ def get_best_path(digraph, start, end, path, max_dist_outdoors, best_dist,
     path[0] = path[0] + [Node(start)]
     if not (digraph.has_node(Node(start)) and digraph.has_node(Node(end))):
         raise ValueError('Node not in graph')
-    elif start == end:
+    elif Node(start) == Node(end):
         return path
     else:
         for edge in digraph.get_edges_for_node(Node(start)):
@@ -105,7 +105,7 @@ def get_best_path(digraph, start, end, path, max_dist_outdoors, best_dist,
                     if best_path == None or (len(copy_path[0]) < len(best_path[0])):
                         new_path = get_best_path(digraph, edge.get_destination(),
                                                 end, copy_path, max_dist_outdoors,
-                                                best_path)
+                                                best_dist, best_path)
                         if new_path != None:
                             if best_path != None:
                                 if new_path[1] < best_path[1]:

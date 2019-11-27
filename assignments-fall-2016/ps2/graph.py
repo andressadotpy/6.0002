@@ -86,7 +86,7 @@ class Digraph:
         if node in self.nodes:
             raise ValueError('Duplicate node')
         self.nodes.add(node)
-        self.edges[node] = []
+        self.edges[Node(node)] = []
 
     def add_edge(self, edge):
         """Adds an Edge or WeightedEdge instance to the Digraph. Raises a
@@ -94,9 +94,9 @@ class Digraph:
         in the graph."""
         source = edge.get_source()
         destination = edge.get_destination()
-        if not (source in self.nodes and destination in self.nodes):
+        if not Node(source) in self.nodes or not Node(destination) in self.nodes:
             raise ValueError('Node not in graph')
-        self.edges[source].append(edge)
+        self.edges[Node(source)].append(edge)
 
 
 class TestGraph(unittest.TestCase):
